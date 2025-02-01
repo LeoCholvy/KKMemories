@@ -1,3 +1,4 @@
 #api
 api/vendor
 */.env
+fastapi/.venv

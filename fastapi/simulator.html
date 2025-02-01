@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Testeur d'API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2em;
+        }
+        label {
+            font-weight: bold;
+        }
+        textarea, input, select {
+            width: 100%;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 0.7em 1.5em;
+            font-size: 1em;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 1em;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<h1>Testeur d'API</h1>
+<form id="apiForm">
+    <div>
+        <label for="method">Méthode HTTP :</label>
+        <select id="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="url">URL :</label>
+        <input type="text" id="url" placeholder="http://localhost:8000/endpoint" required>
+    </div>
+
+    <div>
+        <label for="headers">En-têtes (au format JSON) :</label>
+        <textarea id="headers" rows="4">
+{
+  "Content-Type": "application/json"
+}
+      </textarea>
+    </div>
+
+    <div>
+        <label for="body">Corps de la requête (au format JSON) :</label>
+        <textarea id="body" rows="4">
+{
+  "username": "admin",
+  "password": "1234"
+}
+      </textarea>
+    </div>
+
+    <button type="submit">Envoyer la requête</button>
+</form>
+
+<h2>Réponse</h2>
+<div id="responseStatus"></div>
+<pre id="response"></pre>
+
+<script>
+    document.getElementById('apiForm').addEventListener('submit', async function(e) {
+        e.preventDefault(); // Empêche le rechargement de la page
+
+        // Récupérer les valeurs du formulaire
+        const method = document.getElementById('method').value;
+        const url = document.getElementById('url').value;
+
+        let headers;
+        try {
+            headers = JSON.parse(document.getElementById('headers').value);
+        } catch (error) {
+            alert('Les en-têtes doivent être au format JSON valide.');
+            return;
+        }
+
+        const bodyContent = document.getElementById('body').value;
+        let options = {
+            method: method,
+            headers: headers
+        };
+
+        // Pour GET et HEAD, le corps n'est pas pris en charge
+        if (method !== "GET" && method !== "HEAD") {
+            try {
+                JSON.parse(bodyContent); // Vérifier que le JSON est valide
+                options.body = bodyContent;
+            } catch (error) {
+                alert('Le corps de la requête doit être au format JSON valide.');
+                return;
+            }
+        }
+
+        try {
+            // Envoyer la requête
+            const response = await fetch(url, options);
+
+            // Afficher le statut de la réponse
+            document.getElementById('responseStatus').innerText = `Status: ${response.status} - ${response.statusText}`;
+
+            // Récupérer et afficher le contenu de la réponse
+            const text = await response.text();
+            document.getElementById('response').innerText = text;
+        } catch (error) {
+            document.getElementById('responseStatus').innerText = 'Erreur lors de la requête :';
+            document.getElementById('response').innerText = error;
+        }
+    });
+</script>
+</body>
+</html>
