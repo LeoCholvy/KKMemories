@@ -31,6 +31,7 @@ import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home.tsx';
 import About from './pages/About.tsx';
+import Edit from "./pages/Edit.tsx";
 
 const App: React.FC = () => {
   return (
@@ -44,6 +45,9 @@ const App: React.FC = () => {
           <li>
             <Link to="/about">À propos</Link>
           </li>
+          <li>
+            <Link to="/edit">Modifier</Link>
+          </li>
         </ul>
       </nav>
 
@@ -51,6 +55,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/edit" element={<Edit />} />
       </Routes>
 
       {/*  FOOTER  */}
