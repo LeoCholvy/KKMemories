@@ -9,7 +9,7 @@ interface ActionsProps {
 
 const Actions: React.FC<ActionsProps> = ({ blockId, addBlock, deleteBlock = null }) => {
     const styles = {
-        boder: '1px solid black',
+        border: '1px solid black',
     }
 
     return (
