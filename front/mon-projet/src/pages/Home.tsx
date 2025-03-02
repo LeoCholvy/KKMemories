@@ -1,6 +1,6 @@
 // src/pages/Home.tsx
 import React from 'react';
-import Citation, {CitationType} from "../components/Citation.tsx";
+import Citation, {CitationType} from "../components/Citation";
 
 const Home: React.FC = () => {
     return (

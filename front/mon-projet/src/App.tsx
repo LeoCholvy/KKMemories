@@ -29,9 +29,9 @@
 // src/App.tsx
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home.tsx';
-import About from './pages/About.tsx';
-import Edit from "./pages/Edit.tsx";
+import Home from './pages/Home';
+import About from './pages/About';
+import Edit from "./pages/Edit";
 
 const App: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
-import Avatar from "./Avatar.tsx";
-import ButtonLike from "./ButtonLike.tsx";
+import Avatar from "./Avatar";
+import ButtonLike from "./ButtonLike";
 
 // Créer des énumérations pour les couleurs et les types de citation
 enum CitationColor {
