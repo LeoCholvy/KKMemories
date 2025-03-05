@@ -25,17 +25,16 @@
 //
 // export default App;
 
-import './App.css';
 // src/App.tsx
 import React from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Edit from "./pages/Edit";
+import './App.css';
 
 const App: React.FC = () => {
     return (
-        <body>
         <div>
             {/* Navigation */}
             <nav className="header">
@@ -112,7 +111,6 @@ const App: React.FC = () => {
                 </ul>
             </nav>
         </div>
-        </body>
     );
 };
 
